@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Prescribe</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the form element
+            const form = document.querySelector("form");
+
+            // Add a form submission event listener
+            form.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Serialize form data into JSON
+                const formData = new FormData(form);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+
+                // Send a POST request to the PHP script
+                fetch("process-form.php", {
+                    method: "POST",
+                    body: JSON.stringify(formObject),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status === "success") {
+                        // Display a pop-up confirmation message
+                        alert("Thank you for your message!");
+                        
+                        // Clear the form fields
+                        form.reset();
+                    } else {
+                        // Display an error message if sending failed
+                        alert("Oops! Something went wrong. Please try again later.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+<!-- Preloader -->
+<div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <img src="assets/images/preload.svg" alt="Company Logo">
+        </div>
+    </div>
+</div>
+<!-- /End Preloader -->
+
+
+
+    <!-- Start Header Area -->
+    <header class="header navbar-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="nav-inner">
+                        <!-- Start Navbar -->
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="assets/images/logo/white-logo.svg" alt="Logo">
+                            </a>
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ms-auto">
+                                    <li class="nav-item">
+                                        <a href="#home" class="page-scroll active"
+                                            aria-label="Toggle navigation">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#contact" class="page-scroll"
+                                            aria-label="Toggle navigation">Contact</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#join" class="page-scroll"
+                                            aria-label="Toggle navigation">Join Testing Program</a>
+                                    </li>
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                            <div class="button add-list-button">
+                                <a href="https://script.prescribe.co.za/" class="btn">Login</a>
+                            </div>
+                        </nav>
+                        <!-- End Navbar -->
+                    </div>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </header>
+    <!-- End Header Area -->
+
+    <!-- Start Hero Area -->
+    <section id="home" class="hero-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-md-12 col-12">
+                    <div class="hero-content">
+                        <h1 class="wow fadeInLeft" data-wow-delay=".4s">Introducing Prescribe: Pioneering Medication Management Excellence.</h1>
+                     <br>
+                        <p class="wow fadeInLeft" data-wow-delay=".6s">Prescribe goes beyond a prescription management platform; it serves as the vital link connecting patients, doctors, and pharmacies within a seamless healthcare ecosystem. Our dedication to improving patient well-being, curbing prescription medication misuse, and nurturing informed healthcare choices sets a fresh benchmark in comprehensive medication management.</p>
+                        <p class="wow fadeInLeft" data-wow-delay=".6s">Coming soon to your favourite app store!</p>
+                        <div class="button wow fadeInLeft" data-wow-delay=".8s">
+                            <div class="app-icon apple">
+                                <i class="lni lni-apple"></i> App Store
+                            </div>
+                            <div class="app-icon google">
+                                <i class="lni lni-play-store"></i> Google Play
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12 col-12">
+                    <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
+                        <img src="assets/images/hero/phone.png" alt="#">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Hero Area -->
+
+    <!-- Start Features Area -->
+    <section id="features" class="features section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h3 class="wow zoomIn" data-wow-delay=".2s">Our Platform, Our Principles</h3>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Your experience with Prescribe Experience only gets better!
+                        </h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Prescribe's innovative approach continually enhances user experiences. Through regular updates, user feedback, and cutting-edge technologies, Prescribe ensures that its platform evolves to meet changing needs, resulting in a seamless and ever-improving user journey. This commitment to improvement is at the core of Prescribe's mission.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Feature -->
+                    <div class="single-feature wow fadeInUp" data-wow-delay=".2s">
+                        <i class="lni lni-first-aid"></i>
+                        <h3>Empowering Adherence, Ensuring Safety</h3>
+                        <p>At the heart of Prescribe lies a commitment to empower patients to adhere to their prescribed treatment plans. 
+                            Our platform revolutionizes medication management by orchestrating timely reminders, intuitive dosage tracking, 
+                            and personalized schedules, all aimed at making adherence effortless and outcomes remarkable. 
+                            Prescribe stands as a steadfast guardian against medication misuse, promoting a safer, healthier world. </p>
+                    </div>
+                    <!-- End Single Feature -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Feature -->
+                    <div class="single-feature wow fadeInUp" data-wow-delay=".4s">
+                        <i class="lni lni-database"></i>
+                        <h3>Knowledge at Your Fingertips</h3>
+                        <p>Prescribe transforms into your personal repository of wisdom with its comprehensive educational resources tailored for patients, 
+                            doctors and pharmacists. Empower yourself with accurate drug information, potential side effects, and best practices for medication use.
+                             Our mission is to equip patients with the insights they need to be active partners in their healthcare journey,
+                              fostering a deeper understanding and a stronger sense of control.</p>
+                    </div>
+                    <!-- End Single Feature -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Single Feature -->
+                    <div class="single-feature wow fadeInUp" data-wow-delay=".6s">
+                        <i class="lni lni-link"></i>
+                        <h3>Seamless Integration, Elevated Care</h3>
+                        <p>Prescribe eliminates silos, breaking down barriers by enabling healthcare professionals to collaborate more effectively 
+                            and deliver a unified standard of care while providing a comprehensive, 
+                            single view of the patient's medical history and needs.</p>
+                    </div>
+                   
+            </div>
+        </div>
+    </section>
+    <!-- End Features Area -->
+
+    <!-- Start Achievement Area -->
+    <section class="our-achievement section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                    <div class="title">
+                        <h2>Beyond Boundaries, Beyond Limits</h2>
+                        <p>Prescribe's vision stretches beyond the confines of a platform.
+                             It aspires to catalyze a movement—a movement that champions the convergence of technology, empathy, 
+                             and excellence in healthcare. By harnessing the power of data, Prescribe drives innovations that anticipate patient needs,
+                              identify trends, and refine healthcare strategies. 
+                            The result? A transformative solution that transcends traditional healthcare paradigms.</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </section>
+    <!-- End Achievement Area -->
+<!-- Start Contact Area -->
+<section id="contact" class="contact section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h3 class="wow zoomIn" data-wow-delay=".2s">Contact Us</h3>
+                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Get in Touch</h2>
+                    <p class="wow fadeInUp" data-wow-delay=".6s">Have questions or feedback? We'd love to hear from you.</p>
+                    <p class="wow fadeInUp" data-wow-delay=".6s">Are you ready to embark on a healthcare experience that transcends boundaries, empowers patients, and revolutionizes medication management? 
+                        Welcome to Prescribe—a place where connectivity breeds wellness, education fuels empowerment, and collaboration defines care. Your journey to a healthier, more informed life begins now.
+                        
+                        Whether you are interested in partnerships, have enquiries, or would like to participate in prototype testing - get in touch with us today.
+                        </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Contact Information -->
+                <div class="contact-info wow fadeInUp" data-wow-delay=".2s">
+                    <h4>Contact Information</h4>
+                    <p>Email: <a href="mailto:info@prescribe.co.za">info@prescribe.co.za</a></p>
+                    <!-- Add any additional contact information here -->
+                </div>
+            </div>
+            <div class="col-md-6"><!-- Contact Form -->
+                <div class="contact-form wow fadeInUp" data-wow-delay=".4s">
+                    <h4>Send Us a Message</h4>
+                    <form action="process-form.php" method="post">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="first-name">First Name<span class="mandatory">*</span></label>
+                                    <input type="text" id="first-name" name="First Name" placeholder="First Name" required class="theme-text-input">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="last-name">Last Name<span class="mandatory">*</span></label>
+                                    <input type="text" id="last-name" name="Last Name" placeholder="Last Name" required class="theme-text-input">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">Email Address<span class="mandatory">*</span></label>
+                                    <input type="email" id="email" name="Email Address" placeholder="Email Address" required class="theme-text-input">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="contact-number">Contact Number</label>
+                                    <input type="tel" id="contact-number" name="Contact Number" placeholder="Contact Number" class="theme-text-input">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="message">Message<span class="mandatory">*</span></label>
+                                    <textarea id="message" name="Message" placeholder="Message" required class="theme-text-input"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group button">
+                                    <button type="submit" class="theme-button">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- End Contact Form -->
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ End Contact Area -->
+
+
+   <!-- Start Call To Action Area -->
+<section id="join" class="section call-action">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-12 col-12">
+                <div class="cta-content">
+                    <h2 class="wow fadeInUp" data-wow-delay=".2s">Be a Pioneer in Healthcare Innovation
+                        <br>Join Our Prototype Testing Program!
+                    </h2>
+                    <p class="wow fadeInUp" data-wow-delay=".4s">We are thrilled to invite you to be a part of an exciting opportunity that is set to revolutionize the healthcare industry. At Prescribe, we are on a mission to create a solution that will streamline medication management, enhance patient care, and foster seamless collaboration between pharmacies, doctors, and patients.
+                        By signing up for our prototype testing program, you will have the exclusive chance to experience our cutting-edge platform before its official launch. As a participant, you will not only gain early access to a transformative tool, but you will also play a crucial role in shaping its final form.</p>
+                    <div class="button wow fadeInUp" data-wow-delay=".6s">
+                        <a href="#joinForm" class="btn" id="showFormButton">Join In Now!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Call To Action Area -->
+
+<!-- Start Join Form Area (Initially Hidden) -->
+<section id="joinForm" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-12 col-12">
+                <div class="cta-content">
+                    <h2 class="wow fadeInUp" data-wow-delay=".2s">Join Our Prototype Testing Program</h2>
+                    <br>
+                    <br>
+                    <form id="joinPrototypeForm">
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" class="theme-text-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" name="lastName" class="theme-text-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailAddress">Email Address:</label>
+                            <input type="email" id="emailAddress" name="emailAddress" class="theme-text-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Role:</label>
+                            <select id="userRole" name="userRole" class="theme-text-input" required>
+                                <option value="" disabled selected>Select Role</option>
+                                <option value="Pharmacy">Pharmacy</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Patient">Patient</option>
+                            </select>
+                        </div>
+                        <div id="pharmacyFields" style="display: none;">
+                            <div class="form-group">
+                                <label for="pharmacyName">Pharmacy Name:</label>
+                                <input type="text" id="pharmacyName" name="pharmacyName" class="theme-text-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="pharmacyLocation">Pharmacy Location:</label>
+                                <input type="text" id="pharmacyLocation" name="pharmacyLocation" class="theme-text-input">
+                            </div>
+                        </div>
+                        <div id="doctorFields" style="display: none;">
+                            <div class="form-group">
+                                <label for="practiceName">Practice Name:</label>
+                                <input type="text" id="practiceName" name="practiceName" class="theme-text-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="practiceLocation">Practice Location:</label>
+                                <input type="text" id="practiceLocation" name="practiceLocation" class="theme-text-input">
+                            </div>
+                        </div>
+                        <div class="form-group button">
+                            <button type="submit" class="theme-button">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Join Form Area -->
+
+    <!-- Start Footer Area -->
+    <footer class="footer">
+        <!-- Start Footer Top -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-about">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="assets/images/logo/white-logo.svg" alt="#">
+                                </a>
+                            </div>
+                            <!-- <p>Welcome to Prescribe—a place where connectivity breeds wellness, 
+                                education fuels empowerment, and collaboration defines care. Your 
+                                journey to a healthier, more informed life begins now.
+                                </p> -->
+                            
+                           
+                        </div>
+                       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ End Footer Top -->
+    </footer>
+    <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/tiny-slider.js"></script>
+    <script src="assets/js/glightbox.min.js"></script>
+    <script src="assets/js/count-up.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script type="text/javascript">
+
+        //====== counter up 
+        var cu = new counterUp({
+            start: 0,
+            duration: 2000,
+            intvalues: true,
+            interval: 100,
+            append: " ",
+        });
+        cu.start();
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const showFormButton = document.getElementById("showFormButton");
+        const joinForm = document.getElementById("joinForm");
+        const userRole = document.getElementById("userRole");
+        const pharmacyFields = document.getElementById("pharmacyFields");
+        const doctorFields = document.getElementById("doctorFields");
+
+        showFormButton.addEventListener("click", function () {
+            joinForm.style.display = "block";
+        });
+
+        userRole.addEventListener("change", function () {
+            const selectedRole = userRole.value;
+
+            // Hide all fields initially
+            pharmacyFields.style.display = "none";
+            doctorFields.style.display = "none";
+
+            // Show fields based on selected role
+            if (selectedRole === "Pharmacy") {
+                pharmacyFields.style.display = "block";
+            } else if (selectedRole === "Doctor") {
+                doctorFields.style.display = "block";
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>
