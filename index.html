@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="assets/css/glightbox.min.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
-
+    <!-- <link rel="stylesheet" href="assets/css/popup.css" /> -->
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Get the form element
@@ -119,7 +120,8 @@
                                 </ul>
                             </div> <!-- navbar collapse -->
                             <div class="button add-list-button">
-                                <a href="https://script.prescribe.co.za/" class="btn">Login</a>
+                              <button class="btn" id="loginButton">Login</button>
+
                             </div>
                         </nav>
                         <!-- End Navbar -->
@@ -160,6 +162,36 @@
         </div>
     </section>
     <!-- End Hero Area -->
+
+<!-- Start of login -->
+<div id="loginModal" class="modal" style="display: none;">
+    <div class="login-container">
+       
+        <img class="logo" src="assets\images\favicon.svg" alt="Business Logo">
+        <br>
+        <h1>Login</h1>
+        <br>
+        <p>Please enter your login details below</p>
+        <br>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="practiceNumber">Practice Number:</label>
+            <input type="text" id="practiceNumber" name="practiceNumber" required>
+<br>
+            <button type="submit">Login</button>
+        </form>
+        <br>
+        <a class="forgot-password" id="forgotPassword" href="reset-password.html">Forgot Password?</a>
+    </div>
+</div>
+
+<!-- End of login -->
+
 
     <!-- Start Features Area -->
     <section id="features" class="features section">
@@ -404,6 +436,38 @@
         });
         cu.start();
     </script>
+
+<script>
+    const loginButton = document.getElementById("loginButton");
+    const loginModal = document.getElementById("loginModal");
+
+    loginButton.addEventListener("click", () => {
+        // Scroll to the top of the page
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Add smooth scrolling effect
+        });
+
+        // Add a smooth transition when the pop-up comes up
+        loginModal.style.display = "block";
+        setTimeout(() => {
+            loginModal.classList.add("show-modal");
+        }, 10);
+        document.body.classList.add("modal-open");
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === loginModal) {
+            // Add a smooth transition when the pop-up goes off
+            loginModal.classList.remove("show-modal");
+            setTimeout(() => {
+                loginModal.style.display = "none";
+            }, 300); // Wait for the transition to complete
+            document.body.classList.remove("modal-open");
+        }
+    });
+</script>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
