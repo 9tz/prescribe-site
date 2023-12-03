@@ -17,8 +17,68 @@
     <link rel="stylesheet" href="assets/css/glightbox.min.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <!-- <link rel="stylesheet" href="assets/css/popup.css" /> -->
-    
-    <script>
+
+ <!-- Firebase SDK -->
+ <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"></script>
+
+ <script>
+     // Firebase configuration
+     const firebaseConfig = {
+         apiKey: "AIzaSyDMfqbvfCCRohWsuWP7B3kSovWzEu-TS4I",
+         authDomain: "prescribe-mvp.firebaseapp.com",
+         projectId: "prescribe-mvp",
+         storageBucket: "prescribe-mvp.appspot.com",
+         messagingSenderId: "875583898742",
+         appId: "1:875583898742:web:318ee96c53b953f4decb57",
+         measurementId: "G-7EXSQ82ZHX"
+     };
+
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+
+     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+     document.addEventListener("DOMContentLoaded", () => {
+         const loginForm = document.getElementById("loginModal");
+
+         loginForm.addEventListener("submit", (event) => {
+             event.preventDefault();
+
+             const email = event.target.email.value;
+             const password = event.target.password.value;
+             const practiceNumber = event.target.practiceNumber.value;
+
+             firebase.auth().signInWithEmailAndPassword(email, password)
+                 .then(({ user }) => {
+                     return user.getIdToken().then((idToken) => {
+                         return fetch("/sessionLogin", {
+                             method: "POST",
+                             headers: {
+                                 Accept: "application/json",
+                                 "Content-Type": "application/json",
+                                 "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                             },
+                             body: JSON.stringify({ idToken, practiceNumber }),
+                         });
+                     });
+                 })
+                 .then(() => {
+                     return firebase.auth().signOut();
+                 })
+                 .then(() => {
+                     window.location.assign(`/home?practiceNumber=${practiceNumber}`);
+                 })
+                 .catch((error) => {
+                     console.error("Login failed:", error);
+                     // Handle login failure
+                 });
+         });
+     });
+ </script>
+
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Get the form element
             const form = document.querySelector("form");
@@ -60,7 +120,7 @@
                 });
             });
         });
-    </script>
+    </script> -->
 
 </head>
 
@@ -119,10 +179,10 @@
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            <div class="button add-list-button">
+                            <!-- <div class="button add-list-button">
                               <button class="btn" id="loginButton">Login</button>
 
-                            </div>
+                            </div> -->
                         </nav>
                         <!-- End Navbar -->
                     </div>
@@ -164,9 +224,8 @@
     <!-- End Hero Area -->
 
 <!-- Start of login -->
-<div id="loginModal" class="modal" style="display: none;">
+<div id="loginModal class="modal" style="display: none;">
     <div class="login-container">
-       
         <img class="logo" src="assets\images\favicon.svg" alt="Business Logo">
         <br>
         <h1>Login</h1>
@@ -182,15 +241,15 @@
 
             <label for="practiceNumber">Practice Number:</label>
             <input type="text" id="practiceNumber" name="practiceNumber" required>
-<br>
+            <br>
             <button type="submit">Login</button>
         </form>
         <br>
         <a class="forgot-password" id="forgotPassword" href="reset-password.html">Forgot Password?</a>
     </div>
 </div>
-
 <!-- End of login -->
+
 
 
     <!-- Start Features Area -->
@@ -246,8 +305,8 @@
     </section>
     <!-- End Features Area -->
 
-    <!-- Start Achievement Area -->
-    <section class="our-achievement section">
+    <!-- Start Vision Section -->
+    <section class="vision section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
@@ -264,40 +323,69 @@
           </div>
     </section>
     <!-- End Achievement Area -->
+
 <!-- Start Contact Area -->
 <section id="contact" class="contact section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-title">
-                    <h3 class="wow zoomIn" data-wow-delay=".2s">Contact Us</h3>
-                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Get in Touch</h2>
-                    <p class="wow fadeInUp" data-wow-delay=".6s">Have questions or feedback? We'd love to hear from you.</p>
-                    <p class="wow fadeInUp" data-wow-delay=".6s">Are you ready to embark on a healthcare experience that transcends boundaries, empowers patients, and revolutionizes medication management? 
-                        Welcome to Prescribe—a place where connectivity breeds wellness, education fuels empowerment, and collaboration defines care. Your journey to a healthier, more informed life begins now.
-                        
-                        Whether you are interested in partnerships, have enquiries, or would like to participate in prototype testing - get in touch with us today.
-                        </p>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="section-title">
+                <h3 class="wow zoomIn" data-wow-delay=".2s">Contact Us</h3>
+                <h2 class="wow fadeInUp" data-wow-delay=".4s">Get in Touch</h2>
+                <p class="wow fadeInUp" data-wow-delay=".6s">Have questions or feedback? We'd love to hear from you.</p>
+                <p class="wow fadeInUp" data-wow-delay=".6s">Are you ready to embark on a healthcare experience that transcends boundaries, empowers patients, and revolutionizes medication management? 
+                    Welcome to Prescribe—a place where connectivity breeds wellness, education fuels empowerment, and collaboration defines care. Your journey to a healthier, more informed life begins now.
+                    
+                    Whether you are interested in partnerships, have enquiries, or would like to participate in prototype testing - get in touch with us today.
+                </p>
             </div>
         </div>
-
-           
-                <div class="centered-section"><div class="contact-info wow fadeInUp" data-wow-delay=".2s">
-                    <h4>Contact Information</h4>
-                    <p>Email: <a href="mailto:info@prescribe.co.za">info@prescribe.co.za</a></p>
-   
-                </div>
-     
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form id="contactUs" onsubmit="sendEmail(); reset(); return false;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName">First Name:</label>
+                                <input type="text" id="firstName" name="firstName" class="theme-text-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name:</label>
+                                <input type="text" id="lastName" name="lastName" class="theme-text-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailAddress">Email Address:</label>
+                                <input type="email" id="emailAddress" name="emailAddress" class="theme-text-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneNo">Phone Number:</label>
+                                <input type="tel" id="phoneNo" name="phoneNo" class="theme-text-input" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                                <!-- <small>Format: 123-456-7890</small> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="userMessage">Your Message:</label>
+                                <textarea id="userMessage" name="userMessage" class="theme-text-input" style="height: 310px; resize: none;" required></textarea>
+                            </div>
+                            <div class="form-group button">
+                                <button type="submit" class="theme-button">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-          
         </div>
     </div>
 </section>
-<!--/ End Contact Area -->
 
 
-   <!-- Start Call To Action Area -->
+
+
+
+
+  <!-- Start Call To Action Area -->
 <section id="join" class="section call-action">
     <div class="container">
         <div class="row">
@@ -309,7 +397,7 @@
                     <p class="wow fadeInUp" data-wow-delay=".4s">We are thrilled to invite you to be a part of an exciting opportunity that is set to revolutionize the healthcare industry. At Prescribe, we are on a mission to create a solution that will streamline medication management, enhance patient care, and foster seamless collaboration between pharmacies, doctors, and patients.
                         By signing up for our prototype testing program, you will have the exclusive chance to experience our cutting-edge platform before its official launch. As a participant, you will not only gain early access to a transformative tool, but you will also play a crucial role in shaping its final form.</p>
                     <div class="button wow fadeInUp" data-wow-delay=".6s">
-                        <a href="#joinForm" class="btn" id="showFormButton">Join In Now!</a>
+                        <a href="#contact" class="btn" id="showFormButton">Join In Now!</a>
                     </div>
                 </div>
             </div>
@@ -439,7 +527,7 @@
 
 <script>
     const loginButton = document.getElementById("loginButton");
-    const loginModal = document.getElementById("loginModal");
+    const loginModal = document.getElementById("loginForm");
 
     loginButton.addEventListener("click", () => {
         // Scroll to the top of the page
@@ -498,6 +586,24 @@
     });
 </script>
 
+<script src= https://smtpjs.com/v3/smtp.js ></script>
+<script>
+function sendEmail(){
+                Email.send({
+                Host : "smtp.gmail.com",
+                Username : "testingstuff",
+                Password : "password",
+                To : 'bradleynkosilathi@gmail.com',
+                From : document.getElementById("email").value,
+                Subject : "New Contact Form Inquiry",
+                Body : "And this is the body"
+            }).then(
+            message => alert(message)
+            );
+}
+
+</script>
+ 
 </body>
 
 </html>
